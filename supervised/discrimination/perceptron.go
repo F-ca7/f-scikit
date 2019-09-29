@@ -1,10 +1,12 @@
 package discrimination
 
+import (
+	. "go-scikit/model"
+)
+
 const (
 	MAX_TURN = 10000 // 最大迭代轮数
 )
-
-type Vector []float64
 
 // 两类线性可分感知器
 type TwoClassPerceptron struct {
@@ -12,36 +14,6 @@ type TwoClassPerceptron struct {
 	Class        []int    // 类别，以+/-1区分
 	WeightVector Vector   // 权向量
 	IncreFactor  float64  // 校正增量
-}
-
-// 向量点乘
-func vecDot(u, v Vector) (res float64) {
-	if len(u) != len(v) {
-		panic("向量长度不同")
-	}
-	res = 0
-	for i, val := range u {
-		res += val * v[i]
-	}
-	return
-}
-
-// 向量放大/缩小
-func vecMultByPureNum(u Vector, size float64) (res Vector) {
-	res = make(Vector, len(u))
-	for i, val := range u {
-		res[i] = val * size
-	}
-	return
-}
-
-// 向量加法
-func vecAdd(u, v Vector) (res Vector) {
-	res = make(Vector, len(u))
-	for i, val := range u {
-		res[i] = val + v[i]
-	}
-	return
 }
 
 // 开始训练
@@ -74,10 +46,10 @@ func (p *TwoClassPerceptron) Train() {
 		// fmt.Printf("第%d轮迭代\n", turnCnt)
 		errCnt = 0
 		for i := 0; i < sampleNums; i++ {
-			res := vecDot(w, augMat[i])
+			res := VecDot(w, augMat[i])
 			if res <= 0 {
 				// 分类错误
-				w = vecAdd(w, vecMultByPureNum(augMat[i], p.IncreFactor))
+				w = VecAdd(w, VecMultByPureNum(augMat[i], p.IncreFactor))
 				errCnt++
 			}
 		}
