@@ -1,6 +1,4 @@
-package Util;
-
-import org.junit.Test;
+package util;
 
 import java.util.*;
 

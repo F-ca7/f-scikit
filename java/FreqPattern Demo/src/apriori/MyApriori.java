@@ -1,6 +1,6 @@
 package apriori;
 
-import Util.SetUtil;
+import util.SetUtil;
 
 import java.io.BufferedReader;
 import java.io.File;

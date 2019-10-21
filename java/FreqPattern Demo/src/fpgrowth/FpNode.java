@@ -20,6 +20,13 @@ public class FpNode implements Comparable<FpNode> {
     // next node of the same item
     private FpNode next;
 
+    @Override
+    public int compareTo(FpNode node) {
+        int count0 = node.getCount();
+        // in descending order
+        return count0 - this.count;
+    }
+
     public FpNode() {
 
     }
@@ -105,10 +112,4 @@ public class FpNode implements Comparable<FpNode> {
         this.count += n;
     }
 
-    @Override
-    public int compareTo(FpNode node) {
-        int count0 = node.getCount();
-        // in descending order
-        return count0 - this.count;
-    }
 }

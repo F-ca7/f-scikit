@@ -1,6 +1,6 @@
 package fpgrowth;
 
-import Util.SetUtil;
+import util.SetUtil;
 
 import java.io.*;
 import java.util.*;
@@ -302,7 +302,7 @@ public class FpTree {
      * generate association rules from frequent item sets
      * @param supItemSets frequent item sets
      */
-    public static void generateAssociationRules(List<List<String>> supItemSets) {
+    private static void generateAssociationRules(List<List<String>> supItemSets) {
         double conf;
         List<String> rule;
         for (List<String> itemSet : supItemSets) {
@@ -313,7 +313,7 @@ public class FpTree {
                 int supCntS = getSupportCnt(subset);
                 // check confidence
                 conf = (double)supCntL/supCntS;
-                if(conf > minConfidence) {
+                if(conf >= minConfidence) {
                     rule = new ArrayList<>(3);
                     // s => l-s, confidence
                     rule.add(SetUtil.listToString(subset));
